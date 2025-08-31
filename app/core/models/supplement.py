@@ -1,8 +1,13 @@
 from .base import Base
 from sqlalchemy.orm import Mapped, mapped_column
+from .mixins.int_id_pk import IntIdPKMixin
 
-class Supplement(Base):
+
+class Supplement(IntIdPKMixin, Base):
+    # id генерируется автоматически
     name: Mapped[str] = mapped_column(unique=True)
+
+
 
 
 # id              SERIAL PRIMARY KEY
