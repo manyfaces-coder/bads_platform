@@ -10,7 +10,7 @@ class Source(IntIdPKMixin,Base):
     name: Mapped[str] = mapped_column(String(255), unique=True)
     slug: Mapped[str] = mapped_column(String(255), unique=True)
     url: Mapped[str] = mapped_column(Text, unique=True)
-    picture: Mapped[str | None] = mapped_column(nullable=True)
+    picture: Mapped[str | None] = mapped_column(Text, nullable=True)
     description: Mapped[str | None] = mapped_column(
         Text,
         nullable=True,
