@@ -15,7 +15,7 @@ class SourceCreate(SourceBase):
     pass
 
 
-class SourceRead(BaseModel):
+class SourceRead(SourceBase):
     id: int
 
     class Config: # позволяет делать SourceRead.model_validate(sa_obj)
