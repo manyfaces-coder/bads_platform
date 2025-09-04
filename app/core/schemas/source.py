@@ -10,9 +10,20 @@ class SourceBase(BaseModel):
     description: Optional[str] = None
     picture: Optional[str] = None
 
+    model_config = {"extra": "forbid"}
 
 class SourceCreate(SourceBase):
     pass
+
+
+class SourceUpdate(SourceBase):
+    name: Annotated[str | None, MinLen(3), MaxLen(255)] = None
+    slug: Annotated[str | None, MinLen(3), MaxLen(255)] = None
+    url: Optional[HttpUrl] = None
+    description: Optional[str] = None
+    picture: Optional[str] = None
+
+    model_config = {"extra": "forbid"}
 
 
 class SourceRead(SourceBase):
