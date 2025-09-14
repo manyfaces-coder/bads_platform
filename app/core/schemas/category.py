@@ -18,4 +18,3 @@ class CategoryRead(CategoryBase):
 
     class Config: # нужно, чтобы Pydantic мог напрямую превращать SQLAlchemy-объекты в Pydantic-схемы
         from_attributes = True
-
