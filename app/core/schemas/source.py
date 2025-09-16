@@ -1,27 +1,26 @@
 from annotated_types import MinLen, MaxLen
 from pydantic import BaseModel, HttpUrl
-from typing import Annotated, Optional
+from typing import Annotated
 
-
+# Источник, из которого берутся данные об экспертизах
 class SourceBase(BaseModel):
     name: Annotated[str, MinLen(3), MaxLen(255)]
     slug: Annotated[str, MinLen(3), MaxLen(255)]
-    url: HttpUrl
-    description: Optional[str] = None
-    picture: Optional[str] = None
+    url: HttpUrl | None = None
+    description: str | None = None
+    picture: str | None = None
 
-    model_config = {"extra": "forbid"}
 
 class SourceCreate(SourceBase):
-    pass
+    model_config = {"extra": "forbid"}
 
 
 class SourceUpdate(SourceBase):
     name: Annotated[str | None, MinLen(3), MaxLen(255)] = None
     slug: Annotated[str | None, MinLen(3), MaxLen(255)] = None
-    url: Optional[HttpUrl] = None
-    description: Optional[str] = None
-    picture: Optional[str] = None
+    url: HttpUrl| None = None
+    description: str | None = None
+    picture: str | None = None
 
     model_config = {"extra": "forbid"}
 

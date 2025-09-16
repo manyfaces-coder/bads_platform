@@ -5,6 +5,7 @@ __all__ = (
     "Category",
     "Source",
     "Manufacturer",
+    "SupplementExpertise",
 )
 
 from .db_helper import db_helper
@@ -13,3 +14,4 @@ from .supplement import Supplement
 from .category import Category
 from .source import Source
 from .manufacturer import Manufacturer
+from .supplement_expertise import SupplementExpertise

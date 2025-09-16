@@ -14,10 +14,12 @@ class Supplement(IntIdPKMixin, TimestampMixin, Base):
     category_id: Mapped[int] = mapped_column(
         ForeignKey("categories.id", ondelete="SET NULL"),
         nullable=True,
+        index=True,
     )
     manufacturer_id: Mapped[int] = mapped_column(
         ForeignKey("manufacturers.id", ondelete="SET NULL"),
         nullable=True,
+        index=True,
     )
     comment: Mapped[str | None] = mapped_column(Text, nullable=True, default="",)
     picture: Mapped[str | None] = mapped_column(Text, nullable=True)

@@ -1,4 +1,4 @@
-from typing import Annotated, Optional
+from typing import Annotated
 from pydantic import BaseModel
 from datetime import datetime
 from annotated_types import MinLen, MaxLen
@@ -6,15 +6,15 @@ from annotated_types import MinLen, MaxLen
 class SupplementBase(BaseModel):
     # id генерируется автоматически
     name: Annotated[str, MinLen(2), MaxLen(255)]
-    comment: Optional[str] = None
-    picture: Optional[str] = None
-
-    model_config = {"extra": "forbid"}
+    comment: str | None = None
+    picture: str | None = None
 
 
 class SupplementCreate(SupplementBase): #то, что клиент реально указывает при создании
     category_id: int | None = None
     manufacturer_id: int | None = None
+
+    model_config = {"extra": "forbid"}
 
 class SupplementRead(SupplementBase): #то, что клиент получает в ответе
     id: int
@@ -29,8 +29,8 @@ class SupplementRead(SupplementBase): #то, что клиент получае�
 
 class SupplementUpdate(SupplementBase):
     name: Annotated[str | None, MinLen(2), MaxLen(255)] = None
-    comment: Optional[str] = None
-    picture: Optional[str] = None
+    comment: str | None = None
+    picture: str | None = None
     category_id: int | None = None
     manufacturer_id: int | None = None
 
