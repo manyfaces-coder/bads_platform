@@ -17,14 +17,16 @@ class SupplementExpertiseBase(BaseModel):
     comment: str | None = None
     collected_at: datetime | None = None
 
-    model_config = {"extra": "forbid"}
+
 
 class SupplementExpertiseCreate(SupplementExpertiseBase):
     supplement_id: int
 
+    model_config = {"extra": "forbid"}
+
 
 class SupplementExpertiseUpdate(SupplementExpertiseBase):
-    pass
+    model_config = {"extra": "forbid"}
 
 class SupplementExpertiseRead(SupplementExpertiseBase):
     id: int
