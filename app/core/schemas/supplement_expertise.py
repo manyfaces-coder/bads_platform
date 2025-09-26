@@ -1,5 +1,4 @@
 from pydantic import BaseModel, HttpUrl
-from typing import Annotated
 from decimal import Decimal
 from datetime import datetime
 
