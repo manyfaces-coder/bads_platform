@@ -13,7 +13,6 @@ class RunConfig(BaseModel):
 
 class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
-    supplements: str = "/supplements"
 
 
 class ApiPrefix(BaseModel):
