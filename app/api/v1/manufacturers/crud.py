@@ -8,7 +8,7 @@ from .schemas import ManufacturerCreate, ManufacturerUpdate
 async def get_manufacturers(session: AsyncSession) -> list[Manufacturer]:
     stmt = select(Manufacturer).order_by(Manufacturer.id)
     result: Result = await session.execute(stmt)
-    manufacturers = result.scalars().all() #TODO: попробовать без этого
+    manufacturers = result.scalars().all()
     return list(manufacturers)
 
 
