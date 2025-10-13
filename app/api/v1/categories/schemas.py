@@ -1,5 +1,5 @@
 from typing import Annotated
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from annotated_types import MinLen, MaxLen
 
 
@@ -18,8 +18,8 @@ class CategoryRead(CategoryBase):
     id: int
     parent_id: int | None
 
-    class Config: # нужно, чтобы Pydantic мог напрямую превращать SQLAlchemy-объекты в Pydantic-схемы
-        from_attributes = True
+    # нужно, чтобы Pydantic мог напрямую превращать SQLAlchemy-объекты в Pydantic-схемы
+    model_config = ConfigDict(from_attributes=True)
 
 
 class CategoryUpdate(CategoryBase):
