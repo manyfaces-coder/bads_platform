@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 # from sqlalchemy.sql.annotation import Annotated
 
-from app.core.models import db_helper
+from app.core import db_helper
 from app.core.schemas.supplement import SupplementRead, SupplementCreate
 from app.crud import supplements as supplements_crud
 router = APIRouter(tags=["Supplements"])

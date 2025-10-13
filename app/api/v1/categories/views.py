@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from app.core.models import db_helper, Category
+from app.core.db_helper import db_helper
+from app.core.models import Category
 from . import crud
 from .schemas import CategoryCreate, CategoryRead, CategoryUpdate
 from .dependencies import category_by_id
@@ -26,7 +26,7 @@ async def get_category(category: Category = Depends(category_by_id), ) -> Catego
     return category
 
 
-@router.patch("/{category_id}/")
+@router.patch("/{category_id}/", response_model=CategoryRead)
 async def update_category(
         category_update: CategoryUpdate,
         category: Category = Depends(category_by_id),
