@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.core.db_helper import db_helper
+from app.core import db_helper
 from app.core.models import Category
 from . import crud
 from .schemas import CategoryCreate, CategoryRead, CategoryUpdate
