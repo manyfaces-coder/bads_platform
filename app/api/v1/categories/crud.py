@@ -1,18 +1,20 @@
-from sqlalchemy import select
-from sqlalchemy.engine import Result
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.models import Category
 from .schemas import CategoryCreate, CategoryUpdate
+from app.api.v1.base_crud import get_rows, get_row_by_id
+
+
 
 async def get_categories(session: AsyncSession) -> list[Category]:
-    stmt = select(Category).order_by(Category.id)
-    result: Result = await session.execute(stmt)
-    categories = result.scalars().all()
-    return list(categories)
+    return await get_rows(session, Category)
 
 
-async def get_category(session: AsyncSession, category_id: int) -> Category | None:
-    return await session.get(Category, category_id)
+async def get_category(
+        session: AsyncSession,
+        category_id: int
+) -> Category | None:
+    return await get_row_by_id(session, model=Category, id=category_id)
 
 
 async def create_category(session: AsyncSession, category_in: CategoryCreate) -> Category:
