@@ -1,5 +1,4 @@
 __all__ = (
-    "db_helper",
     "Base",
     "Supplement",
     "Category",
@@ -10,7 +9,6 @@ __all__ = (
     "SupplementOffer"
 )
 
-from app.core.db_helper import db_helper
 from .base import Base
 from .marketplace import Marketplace
 from .supplement import Supplement

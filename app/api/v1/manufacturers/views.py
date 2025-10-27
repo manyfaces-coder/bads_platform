@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from .schemas import ManufacturerRead, ManufacturerCreate, ManufacturerUpdate
-from app.core.db_helper import db_helper
+from app.core import db_helper
 from . import crud
 from app.core.models import Manufacturer
 from .dependencies import manufacturer_by_id

@@ -1,33 +1,25 @@
 from app.core.models import Manufacturer
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
-from sqlalchemy.engine import Result
 from .schemas import ManufacturerCreate, ManufacturerUpdate
+from app.api.v1.base_crud import get_rows, get_row_by_id, create_record
 
 
 async def get_manufacturers(session: AsyncSession) -> list[Manufacturer]:
-    stmt = select(Manufacturer).order_by(Manufacturer.id)
-    result: Result = await session.execute(stmt)
-    manufacturers = result.scalars().all()
-    return list(manufacturers)
+    return await get_rows(session, Manufacturer)
 
 
 async def get_manufacturer(
         session: AsyncSession,
-        manufacturer_id: int
-) -> Manufacturer | None:
-    return await session.get(Manufacturer, manufacturer_id)
+        manufacturer_id: int,
+) -> Manufacturer:
+    return await get_row_by_id(session, Manufacturer, manufacturer_id)
 
 
 async def create_manufacturer(
         session: AsyncSession,
         manufacturer_in: ManufacturerCreate
 ) -> Manufacturer:
-    # model_dump сериализует модель данных в словарь
-    manufacturer = Manufacturer(**manufacturer_in.model_dump())
-    session.add(manufacturer)
-    await session.commit()
-    return manufacturer
+    return await create_record(session, Manufacturer, manufacturer_in)
 
 
 async def update_manufacturer(
