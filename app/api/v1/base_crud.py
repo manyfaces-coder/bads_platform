@@ -1,5 +1,6 @@
-from typing import Any, Protocol, TypeVar
+from typing import Any, Protocol, TypeVar, Union, Mapping
 from sqlalchemy import select
+from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 # Протокол: у модели есть поле id (int/Any важен факт наличия)
@@ -8,6 +9,7 @@ class HasId(Protocol):
 
 # Тип-переменная для экземпляров моделей (может быть любой переданной моделью главное HasId)
 ModelT = TypeVar("ModelT", bound=HasId)
+CreateSchemaT = TypeVar("CreateSchemaT", bound=BaseModel)
 
 async def get_rows(
     session: AsyncSession,
@@ -36,3 +38,15 @@ async def get_row_by_id(
         model: type[ModelT],
         id: int) -> ModelT | None:
     return await session.get(model, id)
+
+
+async def create_record(
+        session: AsyncSession,
+        model: type[ModelT],
+        # record_in: CreateSchemaT
+        record_in: Union[CreateSchemaT, Mapping[str, Any]],
+) -> ModelT:
+    record = model(**record_in.model_dump())
+    session.add(record)
+    await session.commit()
+    return record

@@ -1,7 +1,7 @@
 from app.core.models import Manufacturer
 from sqlalchemy.ext.asyncio import AsyncSession
 from .schemas import ManufacturerCreate, ManufacturerUpdate
-from app.api.v1.base_crud import get_rows, get_row_by_id
+from app.api.v1.base_crud import get_rows, get_row_by_id, create_record
 
 
 async def get_manufacturers(session: AsyncSession) -> list[Manufacturer]:
@@ -19,11 +19,7 @@ async def create_manufacturer(
         session: AsyncSession,
         manufacturer_in: ManufacturerCreate
 ) -> Manufacturer:
-    # model_dump сериализует модель данных в словарь
-    manufacturer = Manufacturer(**manufacturer_in.model_dump())
-    session.add(manufacturer)
-    await session.commit()
-    return manufacturer
+    return await create_record(session, Manufacturer, manufacturer_in)
 
 
 async def update_manufacturer(
