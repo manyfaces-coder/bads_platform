@@ -8,10 +8,10 @@ async def get_manufacturers(session: AsyncSession) -> list[Manufacturer]:
     return await get_rows(session, Manufacturer)
 
 
-async def get_manufacturer(
+async def get_manufacturer_by_id(
         session: AsyncSession,
         manufacturer_id: int,
-) -> Manufacturer:
+) -> Manufacturer | None:
     return await get_row_by_id(session, Manufacturer, manufacturer_id)
 
 
@@ -27,7 +27,7 @@ async def update_manufacturer(
         manufacturer: Manufacturer,
         manufacturer_update: ManufacturerUpdate
 ) -> Manufacturer:
-    # exclude_unset ужен для исключения полей, которые не были явно заданы
+    # exclude_unset нужен для исключения полей, которые не были явно заданы
     for name, value in manufacturer_update.model_dump(exclude_unset=True).items():
         setattr(manufacturer, name, value)
     await session.commit()
