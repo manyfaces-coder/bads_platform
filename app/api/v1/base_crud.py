@@ -46,7 +46,7 @@ async def create_record(
         # record_in: CreateSchemaT
         record_in: Union[CreateSchemaT, Mapping[str, Any]],
 ) -> ModelT:
-    record = model(**record_in.model_dump())
+    record = model(**record_in.model_dump(exclude_unset=True, mode="json"))
     session.add(record)
     await session.commit()
     return record
