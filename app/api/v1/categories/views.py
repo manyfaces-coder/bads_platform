@@ -22,7 +22,7 @@ async def create_category(category_in: CategoryCreate,
 
 
 @router.get("/{category_id}/", response_model=CategoryRead)
-async def get_category(category: Category = Depends(category_by_id), ) -> Category:
+async def get_category_by_id(category: Category = Depends(category_by_id), ) -> Category:
     return category
 
 

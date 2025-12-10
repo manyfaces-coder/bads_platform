@@ -9,7 +9,7 @@ from . import crud
 async def manufacturer_by_id(manufacturer_id: Annotated[int, Path],
                        session: AsyncSession = Depends(db_helper.scoped_session_dependency),
                        ) -> Manufacturer:
-    manufacturer = await crud.get_manufacturer(manufacturer_id=manufacturer_id, session=session)
+    manufacturer = await crud.get_manufacturer_by_id(manufacturer_id=manufacturer_id, session=session)
     if manufacturer is not None:
         return manufacturer
     raise HTTPException(

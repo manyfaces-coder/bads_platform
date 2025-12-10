@@ -21,7 +21,7 @@ async def create_manufacturer(
     return await crud.create_manufacturer(session=session, manufacturer_in=manufacturer_in)
 
 @router.get("/{manufacturer_id}/", response_model=ManufacturerRead)
-async def get_manufacturer(manufacturer: Manufacturer = Depends(manufacturer_by_id), ) -> Manufacturer:
+async def get_manufacturer_by_id(manufacturer: Manufacturer = Depends(manufacturer_by_id), ) -> Manufacturer:
     return manufacturer
 
 
